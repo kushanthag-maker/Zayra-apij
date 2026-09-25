@@ -1,27 +1,17 @@
 {
-  "name": "zayra-api",
+  "name": "zayra-api-hub",
   "version": "1.0.0",
-  "description": "ZAYRA API - Sri Lankan Developer API Hub",
+  "private": true,
+  "description": "ZAYRA API HUB - API platform for Sri Lankan developers",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "mongoose": "^7.5.0",
-    "jsonwebtoken": "^9.1.0",
-    "bcryptjs": "^2.4.3",
-    "axios": "^1.5.0",
-    "dotenv": "^16.3.1",
-    "yt-dlp": "^1.0.0",
-    "node-fetch": "^3.3.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.50.0",
-    "eslint-config-next": "^14.0.0"
+    "busboy": "^1.6.0",
+    "mongodb": "^6.21.0"
   }
 }

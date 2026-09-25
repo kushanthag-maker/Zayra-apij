@@ -1,15 +1,14 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "git": {
-    "silent": false
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "public",
+  "functions": {
+    "api/index.js": { "maxDuration": 60 }
   },
-  "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "JWT_SECRET": "@jwt_secret",
-    "ADMIN_USERNAME": "@admin_username",
-    "ADMIN_PASSWORD": "@admin_password",
-    "RAPID_API_KEY": "@rapid_api_key"
-  }
+  "rewrites": [
+    { "source": "/f/:id", "destination": "/api/index?__path=files/download/:id" },
+    { "source": "/api/:path*", "destination": "/api/index?__path=:path*" }
+  ],
+  "headers": [
+    { "source": "/api/(.*)", "headers": [ { "key": "Cache-Control", "value": "no-store" } ] }
+  ]
 }
