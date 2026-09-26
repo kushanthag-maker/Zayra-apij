@@ -1,0 +1,8 @@
+{
+  "sample-video": {
+    "title": "Sample Licensed Video",
+    "key": "videos/sample-video.mp4",
+    "contentType": "video/mp4",
+    "filename": "sample-video.mp4"
+  }
+}
