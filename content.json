@@ -1,8 +1,14 @@
 {
   "sample-video": {
     "title": "Sample Licensed Video",
-    "key": "videos/sample-video.mp4",
+    "filename": "sample-video.mp4",
     "contentType": "video/mp4",
-    "filename": "sample-video.mp4"
+    "url": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  },
+  "sample-audio": {
+    "title": "Sample Audio",
+    "filename": "sample-audio.mp3",
+    "contentType": "audio/mpeg",
+    "url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
   }
 }

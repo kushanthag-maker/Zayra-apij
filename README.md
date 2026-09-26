@@ -97,9 +97,9 @@ In MongoDB Atlas → Network Access, allow `0.0.0.0/0` (Vercel uses dynamic IPs)
 EroMe media CDN links need `Referer: https://www.erome.com/`; `proxyUrl` adds it server-side (Range supported). Only `s*/v*.erome.com` hosts can be proxied. Long videos streamed through Vercel are limited by the function max duration (60 s per request; players use Range requests so playback works, but a single full download of a very large video may be cut off — use the direct `url` with the Referer header for big files). Optional env: `EROME_PROXY_SECRET`.
 Data is parsed from public erome.com pages and may break if EroMe changes its HTML.
 
-## Cinesubz API (R2 signed downloads)
+## Cinesubz API (downloads)
 
-Private Cloudflare R2 (S3-compatible) signed download URLs. Use only for files you own or are licensed to distribute.
+Content download API. **No S3/R2 env vars required** when entries use a public `url`.
 
 | Method | Path | Auth | Credits |
 |---|---|---|---|
@@ -108,30 +108,33 @@ Private Cloudflare R2 (S3-compatible) signed download URLs. Use only for files y
 
 ```bash
 curl -H "x-api-key: YOUR_API_KEY" \
-  "https://YOUR-DOMAIN/api/v1/cinesubz/download?id=sample-video&expires=900"
+  "https://YOUR-DOMAIN/api/v1/cinesubz/download?id=sample-video"
 ```
 
-Response includes `downloadUrl` (open before expiry). Register files in `content.json`:
+### content.json (no env needed)
 
 ```json
 {
   "sample-video": {
     "title": "Sample Licensed Video",
-    "key": "videos/sample-video.mp4",
+    "filename": "sample-video.mp4",
     "contentType": "video/mp4",
-    "filename": "sample-video.mp4"
+    "url": "https://example.com/video.mp4"
   }
 }
 ```
 
-### Required env vars (Vercel → Environment Variables)
+- `url` → direct public link (works with zero env vars)
+- `key` → optional R2 object path (only if you set S3_* env for private signed URLs)
+
+### Optional R2 env (only for private bucket signing)
 
 | Name | Example |
 |---|---|
-| `S3_ENDPOINT` | `https://YOUR_ACCOUNT_ID.r2.cloudflarestorage.com` |
+| `S3_ENDPOINT` | `https://ACCOUNT_ID.r2.cloudflarestorage.com` |
 | `S3_REGION` | `auto` |
 | `S3_ACCESS_KEY_ID` | R2 access key |
 | `S3_SECRET_ACCESS_KEY` | R2 secret key |
 | `S3_BUCKET` | private bucket name |
 
-Never commit real R2 keys. Code: `lib/cinesubz.js` + root `content.json`.
+Code: `lib/cinesubz.js` + root `content.json`.
