@@ -82,7 +82,7 @@ Limitations: expiry max 48 h (or never); delete is a soft delete (the provider h
 
 ## Database (MongoDB)
 
-Set `MONGODB_URI` (Vercel → Settings → Environment Variables) and all users, API keys, credits, request logs, stats and file records are stored permanently in MongoDB — nothing resets on redeploy. Optional `MONGODB_DB` (default `zayra_api_hub`). Collections: `kv`, `lists`, `sets`, `hashes`.
+MongoDB is enabled by default (connection string is built into the project). All users, API keys, credits, request logs, stats and file records are stored permanently — nothing resets on redeploy. Optional override: `MONGODB_URI` / `MONGODB_DB` (default `zayra_api_hub`). Collections: `kv`, `lists`, `sets`, `hashes`.
 In MongoDB Atlas → Network Access, allow `0.0.0.0/0` (Vercel uses dynamic IPs). Never commit the connection string.
 
 ## EroMe API (18+)
